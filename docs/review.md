@@ -1,0 +1,13 @@
+# Independent review and takeover verification
+
+The implementation was inherited after an abrupt session handoff on 2026-11-02. Its earlier design/review outcomes were unavailable. A separate review agent examined the existing design and implementation, accepted the bounded architecture before corrective implementation, and reviewed execution, measurement validity and privacy. This record does not assert a recovered pre-implementation review for the inherited code.
+
+Initial review reproduced 11 passing tests and one error-message expectation failure. It identified six push blockers: unrelated or partial caches could be mixed, privacy checks ignored index blobs, a video frame-count mismatch reported zero timing error, reference calibration could retain default fit parameters and bypass reliability gates, the test expected different error wording, and measurement wording implied reference accuracy without ground truth.
+
+Corrections bind reusable caches to source/code/dependency-manifest/device hashes and all five stage-output hashes; inspect index and working content independently; reject output frame-count and clock failures; require finite accepted octave-anchored calibration with residual/inlier/apron checks; repair the test expectation; and describe automatic match coverage and in-sample residuals accurately.
+
+The same reviewer also checked bounded fixes for timing-sidecar validation and preserved automatic intervals, same-voice tie endpoints, explicit excerpt ambiguity with unknown predictions and candidate measure disclosure, and documentation of approximate black-key-plane propagation. Candidate fingers remain available when score ambiguity forces abstention.
+
+The independent re-review found no remaining code blockers. It reran the synthetic/privacy suite: **21 passed**, with clean whitespace checks. The reviewed cases include changed/partial cache rejection, staged content surviving working-file cleanup/deletion, decoded synthetic VFR timestamps and failure gates, invalid timing edits, failed reference fitting, and repeated-excerpt ambiguity. These tests do not establish complete notation grammar support or musical/fingering accuracy.
+
+The private annotated excerpt was inspected by both the implementation agent and reviewer for readable labels and obvious symbol collisions. Additional final full-run and media evidence is recorded in [experiment-log.md](experiment-log.md). Private inputs, caches, derived note tables, diagnostics and rendered media remain under ignored local storage. No source media or consulting documents are included in the public changes.

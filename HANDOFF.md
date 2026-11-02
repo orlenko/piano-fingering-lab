@@ -1,5 +1,7 @@
 # Build the first piano fingering teaching video
 
+> Implementation update (2026-11-02): the local proof of concept now exists. See `README.md` for execution, `docs/experiment-log.md` for measured aggregates and limitations, and `docs/review.md` for the independent review. The bootstrap state below is historical context. Private deliverables remain in `.local/out/`.
+
 ## Immediate instruction
 
 Produce a proof of concept from the video and PDF already supplied by the operator. It should identify the pianist's actual fingers, highlight the current measure in the score, and render a video with hands on the left and score on the right. Also produce a separately annotated score or excerpt. The operator will show the outputs to the musician who played; she will judge whether the fingerings are right.

@@ -12,9 +12,13 @@ __pycache__/
 .env.*
 !.env.example
 data/
+out/
 outputs/
+tmp/
 models/
 checkpoints/
+.build/
+*.dSYM/
 *.mp4
 *.mov
 *.pdf
@@ -28,6 +32,10 @@ checkpoints/
 *.png
 *.jpg
 *.jpeg
+*.svg
+*.csv
+*.tsv
+*.jsonl
 *.pt
 *.pth
 *.safetensors
