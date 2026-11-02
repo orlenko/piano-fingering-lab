@@ -9,6 +9,8 @@ Local-first offline experiments extracting **observed** piano fingerings (`L`/`R
 - **Non-destructive provenance**: Automatic predictions (`provenance="auto"`) are preserved alongside any optional `.local/overrides.json` adjustments (`provenance="manual_override"`).
 - **Privacy & local inference**: All private inputs, caches, diagnostic frames, and generated media live under `.local/` (gitignored). No media is uploaded to hosted services by the pipeline.
 
+Development review used local image tools that placed private rendered diagnostics into the implementation and review assistants' multimodal contexts. That inspection was separate from offline pipeline execution and was not local-model-only review. Explicit approval for hosted image disclosure is not established in the available record; local file storage and git exclusion do not establish such approval. See [review provenance](docs/review.md). Further hosted private-image inspection requires explicit operator approval.
+
 See [HANDOFF.md](HANDOFF.md) for the proof-of-concept specification, [AGENTS.md](AGENTS.md) for experiment rules, [docs/design.md](docs/design.md) for the reviewed system architecture, and [docs/experiment-log.md](docs/experiment-log.md) for sanitized aggregate experiment results.
 
 ## Environment Setup
