@@ -139,3 +139,16 @@ obtain fresh required evidence before gate enablement or verified full adoption.
 Do not replay the old baseline, backfill history, manufacture an index/receipt or
 silently change policy. Dirty/moving source, stale evidence or uncertain cleanup
 stays incomplete; preserve its owned report and resolve with the integrator.
+
+
+## Prospective manual review supplement
+
+The separate [manual procedure and adoption record](quality-manual-review.md)
+selects centralized workflow/roles source
+`36b0b858b293e14af726e0adf58af476334ccd5d` for future manual reviews.
+That source pin is distinct from the unchanged R2 runtime/artifact build source,
+config/lock and policy pins above. It adds explicit role selection, independent
+reports and separate adjudication without enabling execution or claiming an
+attestation, live controller, prior-feature walkthrough or full runtime adoption.
+The local record names actual native review capabilities and remaining gaps;
+stronger experiment/privacy requirements and historical incompleteness remain.

@@ -9,3 +9,13 @@ Prefer local inference in an isolated environment. Python 3.11 with `uv` is the 
 Write a concrete design and have a separate agent review it before non-trivial code. Have a separate agent review finished code before push; fix blockers and re-review fixes. Reviews must cover measurement validity and privacy as well as execution. Record decisions and sanitized experiment results durably. Test the processing stages and inspect the resulting media before declaring success.
 
 Use `main` for this early experiment. Push reviewed code and sanitized records before ending the session; preserve unfinished work as a pushed branch if necessary. Only release permission-cleared or synthetic examples publicly. The project license does not grant rights to third-party models, code, datasets, or musical works.
+
+
+## Manual review procedure
+
+For future work, adopt the shared manual review supplement and centralized role
+instructions at source `36b0b858b293e14af726e0adf58af476334ccd5d` through
+[the local procedure and capability record](docs/quality-manual-review.md).
+This augments the experiment rules above; it does not advance runtime/artifact
+pins, activate tooling or attest to historical reviews. Stronger privacy,
+measurement, real-index, review and integration obligations remain binding.
