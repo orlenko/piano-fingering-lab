@@ -67,3 +67,57 @@ The abrupt prior handoff was reconciled against the working tree and existing lo
 All 667 output frames were preserved; measured maximum relative PTS error was 0.1556 ms and A/V initial-offset error was 0.0 ms. These describe container timing only. No hosted inference service was needed by the processing pipeline; separate assistant image review crossed the inference boundary described above.
 
 The final fresh run completed in 75.6 seconds. Eight composite frames spanning the early pan, steady playing, final attack and post-performance departure were inspected, along with the final annotated excerpt. Labels were legible and no obvious symbol-obscuring collisions were seen in that excerpt. A full decode comparison confirmed identical audio sample bytes and relative audio-frame timestamps before and after muxing. The current cache manifest also passed validation against input bytes, source code, dependency manifests, device and generated stage outputs. The staged-tree privacy and synthetic suite passed all 21 tests. These checks do not replace the musician's pending fingering assessment.
+
+
+## 5. Native desktop alpha (2026-11-03)
+
+The designer archive was reviewed as design input, not executed or copied into
+product code. A separate hostile design review required bounded decoded inputs,
+immutable run/correction snapshots, cross-process locks, persistent job leases,
+exclusive folder export, explicit process ownership, imported-project validation,
+honest tiers, and component-specific packaging notices before implementation.
+
+The resulting SwiftUI/AppKit app packages standalone Python 3.11.16, existing
+locked dependencies and Transkun weights, a precompiled Apple Vision helper,
+AVKit playback and PDFKit review. Processing does not call a hosted API. Native
+source and sanitized records are public; the approximately 1.2 GB local bundle,
+model/runtime binaries, designer archive and all user projects remain ignored.
+
+A relocated copy outside the checkout, in a path containing spaces and with a
+minimal environment, passed bundled-runtime/model/helper checks and all seven
+processing stages on the already authorized local sample. The result preserved
+**667/667** video frames and exposed **156** review events (including unmatched
+events). A deliberate test-only manual correction preserved the automatic
+record byte-for-byte, produced a new completed render, and left the previous run
+intact. Pending corrections blocked export; updated results exported four files
+atomically. Stopping a subsequent real worker preserved the last completed run
+and cleared only its matching lease after owned-group cleanup. The transaction
+test's one manual edit is not a musical reference label and does not alter the
+original zero-edit musician deliverables in `.local/out/`.
+
+Apple's native frameworks separately decoded an output video frame, established
+playability/duration, opened the PDF and rasterized a page locally. No private
+source frame, score, labels, project manifest or diagnostic image was sent into
+an assistant image context for this desktop work. Assistant UI image inspection
+used wholly synthetic fixtures only. Own-view bitmap snapshots cannot capture
+AVPlayer's GPU surface, so they do not establish playback-image quality.
+
+Two development UI crashes were reproduced and traced to the SwiftUI AVKit
+video-player overlay missing its Objective-C superclass linkage. Replacing it
+with an explicit AppKit AVPlayerView and linking AVKit corrected that path.
+The user observed these crashes; they are not counted as successful launches.
+After that fix, four independent native launches passed input, video, score and
+unknown-note states, reported a ready video item and readable PDF for review
+states, and quit normally. The unknown-note check verified unset hand/finger
+controls. These are targeted UI regressions, not broad user-acceptance testing.
+The full Python suite passed **43 tests** (including 22 desktop transaction/cache
+cases); seven native supervisor scenarios and the per-note correction-state test
+also passed. Independent source re-review found no remaining blockers for this
+internal-alpha scope; see [review.md](review.md).
+
+This remains an internal alpha on the development Apple Silicon Mac. Compiler
+and wheel deployment targets support a macOS 14+ target, not a claim of physical
+minimum-version or second-device qualification. Developer ID signing,
+notarization, public binary redistribution compliance (including the GPL-enabled
+ffmpeg binary and model terms), broad score/camera support, and musician-verified
+finger identities remain open. Source-code review/tests cannot close those gates.

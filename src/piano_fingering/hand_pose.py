@@ -247,6 +247,7 @@ def extract_full_rate_hand_poses(
     out_json_path: str | Path | None = None,
     cache_dir: str | Path = ".local/cache",
     expected_size: tuple[int, int] | None = None,
+    helper_path: Path | None = None,
 ) -> tuple[list[FramePose], dict[str, Any]]:
     """Run full-frame Apple Vision 2-hand pose detection with top-left pixel conversion."""
     t0 = time.perf_counter()
@@ -262,7 +263,9 @@ def extract_full_rate_hand_poses(
             container.close()
 
     cache_p = Path(cache_dir)
-    bin_path = _compile_swift_extractor(cache_p / "bin")
+    bin_path = Path(helper_path) if helper_path is not None else _compile_swift_extractor(cache_p / "bin")
+    if not bin_path.is_file():
+        raise FileNotFoundError("The bundled hand-tracking component is missing.")
     raw_out = cache_p / "raw_vision_poses.json"
 
     subprocess.run(

@@ -13,6 +13,17 @@ Development review used local image tools that placed private rendered diagnosti
 
 See [HANDOFF.md](HANDOFF.md) for the proof-of-concept specification, [AGENTS.md](AGENTS.md) for experiment rules, [docs/design.md](docs/design.md) for the reviewed system architecture, and [docs/experiment-log.md](docs/experiment-log.md) for sanitized aggregate experiment results.
 
+## Mac desktop alpha
+
+Fingering Studio adds a native drop area, portable projects, video/PDF review,
+per-note corrections, media updates and atomic export. It bundles the local
+runtime and model; no API key or recipient development setup is needed.
+See [desktop build, use and limits](docs/desktop.md), the
+[reviewed implementation plan](docs/desktop-plan.md), and [validation record](docs/experiment-log.md).
+The initial internal build targets Apple Silicon/macOS 14+, with ad-hoc signing;
+second-Mac qualification, Developer ID/notarization and public binary
+redistribution clearance remain outstanding.
+
 ## Environment Setup
 
 Requires macOS (for Apple `Vision` hand-pose extraction via `swiftc`) and Python 3.11 managed with [`uv`](https://docs.astral.sh/uv/):
@@ -62,7 +73,7 @@ MPLCONFIGDIR="$PWD/.local/cache/mpl" XDG_CACHE_HOME="$PWD/.local/cache" uv run p
 ### Generated Local Deliverables (`.local/out/`)
 
 - `teaching_video.mp4`: `1920x1080` VFR-faithful split-screen video (180°-rotated Pianist-POV hands with upright attack badges on the left, measure-highlighted annotated score on the right, muxed with original audio).
-- `annotated_score.pdf` & `annotated_excerpt.png`: Vector PDF overlay and high-DPI cropped excerpt image with confidence-tiered finger labels (`n` high-confidence auto, `(n?)` low-confidence auto, `?` unknown, `n*` manual override); unplayed measures are left blank.
+- `annotated_score.pdf` & `annotated_excerpt.png`: Vector PDF overlay and high-DPI cropped excerpt image with confidence-tiered finger labels (`n` likely auto, `(n?)` uncertain auto, `?` unknown, `n*` manual override); unplayed measures are left blank.
 - `predictions.csv` & `predictions.json`: Per-event review table with candidate diagnostics, abstention reasons, provenance, and blank `musician_verdict`, `musician_corrected_finger`, and `musician_notes` columns for pianist evaluation.
 - `sanitized_summary.json`: Aggregate stage metrics stripped of local paths and source-derived musical content.
 

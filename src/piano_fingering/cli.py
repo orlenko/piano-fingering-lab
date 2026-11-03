@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import time
-from typing import Any
+from typing import Any, Callable
 
 from .align import AlignedPair, align_performance_to_score
 from .assign import assign_fingerings
@@ -55,6 +55,9 @@ def _cache_identity(video: Path, score: Path, device: str) -> dict[str, Any]:
         name: _file_digest(repo_dir / name)
         for name in ("pyproject.toml", "uv.lock") if (repo_dir / name).is_file()
     }
+    packaged_identity = package_dir / "runtime_identity.json"
+    if packaged_identity.is_file():
+        dependencies["packaged_runtime"] = _file_digest(packaged_identity)
     return {
         "schema": 1, "video_sha256": _file_digest(video), "score_sha256": _file_digest(score),
         "implementation": implementation, "dependencies": dependencies, "device": device,
@@ -188,6 +191,8 @@ def run_pipeline(
     reuse_cached: bool = False,
     device: str = "cpu",
     rotate_hands_180: bool = True,
+    hand_pose_helper: Path | None = None,
+    progress: Callable[[int, str], None] | None = None,
 ) -> dict[str, Any]:
     """Execute Stages 1-7 locally and write all artifacts into out_dir."""
     t_total = time.perf_counter()
@@ -204,6 +209,8 @@ def run_pipeline(
         (out_dir / "cache_manifest.json").unlink(missing_ok=True)
 
     # Stage 1: Audio transcription
+    if progress:
+        progress(1, "Listening to the recording")
     p_trans = out_dir / "transcribed_notes.json"
     if reuse_cached and p_trans.exists():
         print("[Stage 1/7] Reusing cached audio transcription...")
@@ -217,6 +224,8 @@ def run_pipeline(
         )
 
     # Stage 2: Vector score PDF extraction
+    if progress:
+        progress(2, "Reading the score")
     p_score = out_dir / "parsed_score.json"
     if reuse_cached and p_score.exists():
         print("[Stage 2/7] Reusing cached vector score parse...")
@@ -230,6 +239,8 @@ def run_pipeline(
         )
 
     # Stage 3: Subsequence excerpt alignment & measure timing
+    if progress:
+        progress(3, "Finding where you played in the score")
     p_align = out_dir / "alignment.json"
     if reuse_cached and p_align.exists():
         print("[Stage 3/7] Reusing cached audio-to-score subsequence alignment...")
@@ -246,6 +257,8 @@ def run_pipeline(
         )
 
     # Stage 5 (run prior to Stage 4 to provide hand exclusion masks during keyboard tracking)
+    if progress:
+        progress(4, "Following your hands")
     p_poses = out_dir / "hand_poses.json"
     if reuse_cached and p_poses.exists():
         print("[Stage 4/7] Reusing cached full-rate two-hand pose landmarks...")
@@ -256,9 +269,12 @@ def run_pipeline(
             video_path=video_path,
             out_json_path=p_poses,
             cache_dir=cache_dir,
+            helper_path=hand_pose_helper,
         )
 
     # Stage 4: Dual-plane keyboard calibration & backward/forward camera tracking
+    if progress:
+        progress(5, "Locating the keyboard")
     p_cal = out_dir / "keyboard_calibration.json"
     if reuse_cached and p_cal.exists():
         print("[Stage 5/7] Reusing cached dual-plane keyboard calibration...")
@@ -276,6 +292,8 @@ def run_pipeline(
         _save_cache_manifest(out_dir, cache_identity)
 
     # Stage 6: Attack-window dual-plane candidate scoring & order-constrained chord DP
+    if progress:
+        progress(6, "Estimating fingerings")
     print("[Stage 6/7] Solving attack-window dual-plane finger assignments...")
     p_pred_json = out_dir / "predictions.json"
     predictions, meta_assign = assign_fingerings(
@@ -287,6 +305,8 @@ def run_pipeline(
     )
 
     # Stage 7: Non-destructive manual overrides + CSV/JSON + PDF/PNG + VFR split-screen MP4
+    if progress:
+        progress(7, "Preparing the video and score")
     print("[Stage 7/7] Applying overrides (if any) and rendering PDF/PNG/CSV/MP4 deliverables...")
     override_counts = apply_manual_overrides(
         predictions=predictions,

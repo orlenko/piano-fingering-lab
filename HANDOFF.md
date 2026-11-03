@@ -1,5 +1,7 @@
 # Build the first piano fingering teaching video
 
+> Desktop update (2026-11-03): the native internal alpha and reviewed architecture are documented in `docs/desktop.md` and `docs/desktop-plan.md`. Original private proof-of-concept deliverables remain unchanged in `.local/out/`. The alpha has local workflow tests; it is not a notarized, second-Mac-qualified public release.
+
 > Implementation update (2026-11-02): the local proof of concept now exists. See `README.md` for execution, `docs/experiment-log.md` for measured aggregates and limitations, and `docs/review.md` for the independent review. The bootstrap state below is historical context. Private deliverables remain in `.local/out/`.
 
 ## Immediate instruction

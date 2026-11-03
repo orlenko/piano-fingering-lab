@@ -17,7 +17,7 @@ import cv2
 import imageio_ffmpeg
 import numpy as np
 import pdfplumber
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from pypdf import PdfReader, PdfWriter
 import pypdfium2 as pdfium
 from reportlab.lib.colors import Color
@@ -345,7 +345,7 @@ def render_annotated_score(
         )
         banner_txt = (
             f"Observed Fingering PoC (mm. {m_min}-{m_max}, {t_min:.1f}-{t_max:.1f}s)  |  "
-            f"Blue n = High-conf Auto  |  Amber (n?) = Low-conf Auto  |  Gray ? = Unknown  |  "
+            f"Blue n = Likely Auto  |  Amber (n?) = Uncertain Auto  |  Gray ? = Unknown  |  "
             f"{manual_legend}"
         )
         if alignment_ambiguous:
@@ -357,6 +357,8 @@ def render_annotated_score(
         c.setFillColor(Color(0.08, 0.18, 0.36, alpha=1.0))
         c.setFont("Helvetica-Bold", 6.7)
         c.drawCentredString(pw * 0.5, ph - 18.8, banner_txt)
+        c.setFont("Helvetica", 6.5)
+        c.drawCentredString(pw * 0.5, ph - 32.0, "Automatic tiers are heuristic estimates, not verified finger identity. Review with the musician.")
 
         # Group page predictions by chord_group_id in left-to-right order
         page_preds = [
@@ -575,6 +577,13 @@ def render_annotated_score(
             stacked.paste(im, (0, y_cur))
             y_cur += im.height
         stacked.save(out_png_p)
+
+    if out_png_p.exists():
+        with Image.open(out_png_p) as excerpt:
+            disclosed = Image.new("RGB", (excerpt.width, excerpt.height + 58), "white")
+            disclosed.paste(excerpt, (0, 58))
+            ImageDraw.Draw(disclosed).text((18, 15), "Heuristic estimates, not verified finger identity.  Blue: likely | Amber: uncertain | ?: unknown | *: manual", fill="#344539", font=ImageFont.load_default(size=19))
+            disclosed.save(out_png_p)
 
     return {
         "annotated_pdf_path": str(out_pdf_p),
@@ -1036,8 +1045,8 @@ def render_teaching_video(
 
             # Color legend pills at bottom
             legend_items = [
-                ("High-conf Auto", (185, 95, 15)),
-                ("Low-conf Auto (?)", (15, 120, 215)),
+                ("Likely Auto", (185, 95, 15)),
+                ("Uncertain Auto (?)", (15, 120, 215)),
                 ("Abstained (?)", (105, 110, 120)),
             ]
             if manual_override_count > 0:
@@ -1060,7 +1069,7 @@ def render_teaching_video(
 
             cv2.putText(
                 left_pane,
-                "Pending musician evaluation — uncertain predictions preserved as '?'",
+                "Heuristic estimates, not verified finger identity. '?' = unknown.",
                 (28, 1028),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.48,

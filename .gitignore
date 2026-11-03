@@ -40,3 +40,7 @@ checkpoints/
 *.pth
 *.safetensors
 *.task
+/*.zip
+*.app/
+*.dmg
+*.fingeringproject/

@@ -17,3 +17,35 @@ The private annotated excerpt was inspected by both the implementation agent and
 During takeover verification, local `view_image` tools returned rendered diagnostics to the implementation assistant's multimodal context. The separate reviewer independently confirmed using `view_image` and passing the private annotated excerpt into its own multimodal context. This is assistant image inference, not purely local model review; the offline processing pipeline's behavior does not establish that the development review was offline. Exact backend transport and retention cannot be established from the tool results alone.
 
 No explicit direct operator approval for hosted image disclosure is established in the available handoff and session record. Instructions to inspect local outputs and assignments to review code were incorrectly treated as sufficient authorization for this image route. The record cannot claim that this disclosure met the explicit-approval rule in `AGENTS.md`. No further private artifact was opened to investigate or document this correction. Further hosted private-image inspection requires explicit approval; source-code review alone grants none. This correction does not change the computational results or establish musician-verified accuracy.
+
+
+## Desktop design and finished-code review (2026-11-03)
+
+A separate reviewer challenged the concrete native-app design before non-trivial
+implementation and reviewed the finished public source in several rounds. The
+reviewer was explicitly barred from private inputs, the designer archive,
+`.local/`, generated media, runtime binaries and diagnostic logs. This review
+was source-only; it did not independently execute tests or verify musical labels.
+
+Accepted design changes are recorded in [desktop-plan.md](desktop-plan.md).
+Finished-code findings led to run/revision fences on analysis/render/export,
+pre-copy bounded cache validation with positive/corrupt fixtures, bounded regular
+file copying, requested recovery-name preservation, an allowlist for recovery,
+output-integrity checks, explicit unknown correction state, stale player-callback
+fences, checked POSIX setup, and a finite post-KILL cleanup deadline retaining a
+sole eventual reaper. A persistent job lease prevents another writer from
+continuing after uncertain cleanup. No PID loaded from a project is signaled.
+
+The reviewer approved the resulting source for the documented internal alpha,
+with no remaining execution, measurement or privacy code blockers. The approval
+does not cover musician correctness, minimum-version/second-device qualification,
+Developer ID/notarization, or binary redistribution clearance.
+
+Implementation-side verification passed 43 Python tests, seven native supervisor
+scenarios (including nonexistent executable, immediate cancel, ignored TERM,
+normal-exit descendants and saturated pipes), correction-state checks, a relocated
+full worker workflow, and native Apple video/PDF decode checks. Four synthetic
+UI launch/render/normal-quit regressions passed after fixing two observed AVKit
+startup crashes. The checks and their limits are recorded in
+[experiment-log.md](experiment-log.md) and [desktop.md](desktop.md). Only synthetic
+UI pixels were inspected through assistant image tools during this desktop work.
