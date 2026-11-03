@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "repository": "orlenko/piano-fingering-lab",
+  "execution": {
+    "trusted_local": false,
+    "isolation": "unavailable",
+    "checks": [
+      {
+        "id": "canonical-full-suite",
+        "argv": [
+          "uv",
+          "run",
+          "pytest",
+          "-v"
+        ],
+        "timeout_seconds": 600,
+        "max_log_bytes": 262144,
+        "effects": [
+          "Requirement only; disabled. Existing documented canonical suite executes consumer tests and Git subprocesses.",
+          "uv may resolve/download/build/install dependencies or synchronize environment and write package caches; no such approval is granted.",
+          "pytest and native PDF/video/numeric dependencies write temporary synthetic media/tables, test/cache/font data and private logs.",
+          "Includes actual-index/static and dynamic private-manifest/PDF phrase checks on the real checkout; raw snapshots do not preserve those conditions.",
+          "Private input metadata and local paths may appear in failures/logs; keep all evidence private. Skip or missing required evidence is incomplete, not full-gate success."
+        ]
+      },
+      {
+        "id": "actual-index-static-privacy",
+        "argv": [
+          "uv",
+          "run",
+          "pytest",
+          "tests/test_privacy.py::test_no_private_files_or_static_leaks_in_git_tree",
+          "-q"
+        ],
+        "timeout_seconds": 600,
+        "max_log_bytes": 262144,
+        "effects": [
+          "Requirement only; disabled. Read real tracked/index/unignored consumer bytes through Git subprocesses.",
+          "Exported/synthetic Git indexes cannot replace actual integration-index evidence; snapshot execution is unsupported for this obligation.",
+          "uv provisioning/network/build and environment/cache writes remain unapproved; pytest may write test/cache/log data."
+        ]
+      },
+      {
+        "id": "dynamic-private-privacy",
+        "argv": [
+          "uv",
+          "run",
+          "pytest",
+          "tests/test_privacy.py::test_no_dynamic_local_input_phrases_in_git_tree",
+          "-q"
+        ],
+        "timeout_seconds": 600,
+        "max_log_bytes": 262144,
+        "effects": [
+          "Requirement only; disabled. Existing test reads local private input-manifest paths and score PDF text/metadata in memory plus consumer Git bytes.",
+          "Requires separate local-only effects authorization; no source/media upload or hosted reviewer access is granted.",
+          "An absent manifest causes pytest skip; a present manifest with missing/invalid score fails. Schema 1 cannot enforce no-skip completeness; exit zero after skip is insufficient.",
+          "uv may provision/download/build or write environment/cache; pytest writes cache/log data. Private input metadata/paths may enter diagnostics; retain raw evidence privately."
+        ]
+      },
+      {
+        "id": "actual-staged-whitespace",
+        "argv": [
+          "git",
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "timeout_seconds": 600,
+        "max_log_bytes": 262144,
+        "effects": [
+          "Proposed explicit requirement for the actual integration index; disabled. Read staged changes and Git attributes/config.",
+          "A raw snapshot has no real integration index. Immutable-range checks or manufactured indexes are not substitutes.",
+          "An approved future Git route must account for configured hooks/filters/external effects. No such execution or permission is implied here."
+        ]
+      }
+    ]
+  },
+  "reviewer": {
+    "protocol": "recorded-v1",
+    "require_distinct_identities": false,
+    "routes": [
+      {
+        "id": "design",
+        "reviewer_id": "quality_requirements_review",
+        "boundary": {
+          "read_only": true,
+          "enforced": true,
+          "paths": "tracked-source",
+          "tools": [
+            "source-read",
+            "diff-read"
+          ],
+          "network": false,
+          "disclosure": "public-source"
+        }
+      },
+      {
+        "id": "finished-code",
+        "reviewer_id": "quality_requirements_review",
+        "boundary": {
+          "read_only": true,
+          "enforced": true,
+          "paths": "tracked-source",
+          "tools": [
+            "source-read",
+            "diff-read"
+          ],
+          "network": false,
+          "disclosure": "public-source"
+        }
+      }
+    ]
+  },
+  "references": {
+    "instructions": "AGENTS.md",
+    "architecture": "docs/design.md",
+    "threat_model": "docs/quality-adoption.md",
+    "integration": "docs/quality-adoption.md"
+  }
+}
