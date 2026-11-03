@@ -35,7 +35,9 @@ on the development Mac only. Intel, the minimum macOS version on physical
 hardware, and the musician's separate laptop have not been qualified.
 
 This is an **internal evaluation alpha**, not a public distributable release.
-It has no Developer ID signature or notarization. Public distribution also needs
+The developer build command still produces an ad-hoc app. A separate signed
+and notarized evaluation DMG is described in [distribution.md](distribution.md).
+It passed local Gatekeeper and copied-app launch checks. Public distribution also needs
 component-specific redistribution review: the bundled ffmpeg binary reports
 GPL v2 or later, and its corresponding-source obligations are not satisfied by
 the Python wrapper's BSD license. The model/package licenses and nested Torch,

@@ -20,9 +20,11 @@ per-note corrections, media updates and atomic export. It bundles the local
 runtime and model; no API key or recipient development setup is needed.
 See [desktop build, use and limits](docs/desktop.md), the
 [reviewed implementation plan](docs/desktop-plan.md), and [validation record](docs/experiment-log.md).
-The initial internal build targets Apple Silicon/macOS 14+, with ad-hoc signing;
-second-Mac qualification, Developer ID/notarization and public binary
-redistribution clearance remain outstanding.
+The internal developer build targets Apple Silicon/macOS 14+ with ad-hoc signing.
+A separate Developer ID-signed, notarized evaluation DMG has passed local checks
+and Gatekeeper assessment. See the
+[installer procedure and actual state](docs/distribution.md). Recipient-machine
+qualification and redistribution clearance remain outstanding.
 
 ## Environment Setup
 

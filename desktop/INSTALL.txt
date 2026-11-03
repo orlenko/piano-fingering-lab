@@ -1,0 +1,35 @@
+Fingering Studio — evaluation build
+
+Requirements
+Apple Silicon Mac (M1 or later), macOS 14 or later, and several GB of free space
+for the app and projects. This build has been checked on the development Mac;
+your first run on another Mac is still a compatibility test.
+
+You do not need Siri, Apple Intelligence, an API key, Python, Xcode or a paid AI
+subscription. Analysis runs locally and works offline after installation.
+Internet is needed to download the installer and may be used by macOS to verify
+the app when first opened. Normal file-access prompts may appear for protected
+folders. The app analyzes saved files; it does not use the live camera/microphone.
+
+Install
+1. Open the DMG and copy Fingering Studio into Applications.
+   Drag the app onto the Applications shortcut, or use Finder's Copy and Paste.
+2. Eject the DMG.
+3. Open Fingering Studio from Applications.
+If macOS cannot verify the app, stop and contact the person who supplied it.
+No security setting changes or bypass commands are part of installation.
+
+Try it
+Choose or drop one recording and its score PDF. Use a short recording with piano
+audio: up to 30 seconds, 1080p, and 1,000 frames. Score support is limited to some
+digitally typeset editions; scans and many notation exports are not supported.
+Keep both hands and the bass end visible; current calibration expects the camera
+behind the music desk and a clear hand-free view during the clip.
+
+Choose a project location and analyze. Select notes to review estimates. Save
+corrections, then Update video & score before exporting. Automatic Likely and
+Uncertain labels are heuristic estimates; check them against the actual hands.
+
+This is a private evaluation build. Third-party notices remain inside the app.
+Public redistribution needs its own clearance; notarization is not a license or
+a guarantee of musical accuracy. Your originals and saved projects stay local.
